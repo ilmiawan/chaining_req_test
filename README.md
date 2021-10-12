@@ -1,10 +1,10 @@
 # chaining_req_test
-This is only for testing purpose, a fake requests and response for whatsapp business api
+This is only for testing purpose, a fake requests and response for testing monika chaining requests
 
 ## Installation
 ```script
-git clone https://github.com/ilmiawan/fake-whatsapp-server
-cd fake-whatsapp-server
+git clone https://github.com/ilmiawan/chaining_req_test
+cd chaining_req_test
 npm install
 ```
 
@@ -14,55 +14,16 @@ npm run start
 ```
 
 ## How to test
-Login
+Get key token
 ```script
-curl --request POST \
+curl --request GET \
   --url http://localhost:3030/v1/get-key \
-  --header 'Authentication: Basic asdfalskfjasdklfjsladkfjasl;kjfdlks;ajflk;asdjflkasjf' \
-  --header 'Content-Type: application/json'
 ```
 
-check-contacts
+Verify token
 ```script
 curl --request POST \
-  --url http://localhost:3030/v1/cntacts/ \
-  --header 'Authentication: Basic asdfalskfjasdklfjsladkfjasl;kjfdlks;ajflk;asdjflkasjf' \
-  --header 'Content-Type: application/json' \
-  --data '{
-   "blocking": "wait",
-   "contacts": [
-      "+6281234567890"
-   ]
+  --url http://localhost:3030/v1/verify/ \
+  --header 'Authorization: 12342342443' \
 }'
 ```
-
-send-messages-template-text
-```script
-curl --request POST \
-  --url http://localhost:3030/v1/messages/ \
-  --header 'Authentication: Basic asdfalskfjasdklfjsladkfjasl;kjfdlks;ajflk;asdjflkasjf' \
-  --header 'Content-Type: application/json' \
-  --data '{
-	"to": "{{Recipient-WA-ID}}",
-	"type": "template",
-	"template": {
-		"namespace": "<Message Template Namespace>",
-    	"name": "<Message Template Element Name>",
-        "language": {
-    		"policy": "<Message Template Language Policy>",
-    		"code": "<Message Template Language Code>"
-        },
-        "components": [{
-            "type": "body",
-            "parameters": [
-                {
-                    "type": "<param type>",
-                    "text": "<param value>"
-                }
-            ]
-        }]
-	}
-}'
-```
-
-
